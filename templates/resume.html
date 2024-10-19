@@ -1,23 +1,42 @@
 {% extends "base.html" %}
 
 {% block header %}
-    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Логотип" class="header__logo">
-    {% include 'navbar.html' %}
+    <div class="header__container">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Логотип" class="header__logo">
+        {% include 'navbar.html' %}
+    </div>
 {% endblock %}
 {% block content %}
 	<section class="about" id="about">
         <div class="about__container">
-            <h1 class="about__title">Про себе</h1>
+            <div class="about__title title">
+                <h1 class="title__text">Про себе</h1>
+                <div class="title__underline"></div>
+            </div>
         </div>
     </section>
     <section class="education" id="education">
         <div class="education__container">
-            <h1 class="education__title">Освіта</h1>
+            <div class="education__title title">
+                <h1 class="title__text">Освіта</h1>
+                <div class="title__underline"></div>
+            </div>
+        </div>
+    </section>
+    <section class="skills">
+        <div class="skills__container">
+            <div class="skills__title title">
+                <h1 class="title__text">Навички</h1>
+                <div class="title__underline"></div>
+            </div>
         </div>
     </section>
     <section class="projects" id="projects">
         <div class="projects__container">
-            <h1 class="projects__title">Проєкти</h1>
+            <div class="projects__title title">
+                <h1 class="title__text">Проєкти</h1>
+                <div class="title__underline"></div>
+            </div>
         </div>
     </section>
 {% endblock %}
