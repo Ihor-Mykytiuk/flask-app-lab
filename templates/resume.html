@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 
 {% block header %}
+    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Логотип" class="header__logo">
+    {% include 'navbar.html' %}
 {% endblock %}
 {% block content %}
-	<section class="about">
+	<section class="about" id="about">
         <div class="about__container">
             <h1 class="about__title">Про себе</h1>
         </div>
     </section>
-    <section class="education">
+    <section class="education" id="education">
         <div class="education__container">
             <h1 class="education__title">Освіта</h1>
         </div>
     </section>
-    <section class="projects">
+    <section class="projects" id="projects">
         <div class="projects__container">
             <h1 class="projects__title">Проєкти</h1>
         </div>
