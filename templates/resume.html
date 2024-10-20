@@ -73,38 +73,37 @@
         </div>
     </section>
     <section class="projects" id="projects">
-        <div class="projects__container">
+        <div class="container">
             <div class="projects__title title">
                 <h1 class="title__text">Проєкти</h1>
                 <div class="title__underline--light"></div>
             </div>
-            <ul class="projects__list projects-list">
-                <li class="projects-list__item projects-item">
+            <div class="row pb-5 g-5">
+                <div class="projects-list__item projects-item col-md-4">
                     <div class="projects-item__top">
                         <img src="{{ url_for('static',filename='images/project-page.png') }}" alt="Зображення проеєкту" class="projects-item__image">
                     </div>
                     <div class="projects-item__bottom">
                         <h3 class="projects-item__title">Адаптивна верстка сайту</h3>
                     </div>
-                </li>
-                <li class="projects-list__item projects-item">
+                </div>
+                <div class="projects-list__item projects-item col-md-4">
                     <div class="projects-item__top">
                         <img src="{{ url_for('static',filename='images/project-habits.png') }}" alt="Зображення проеєкту" class="projects-item__image">
                     </div>
                     <div class="projects-item__bottom">
                         <h3 class="projects-item__title">Планувальник задач на Flask</h3>
                     </div>
-                </li>
-                <li class="projects-list__item projects-item">
+                </div>
+                <div class="projects-list__item projects-item col-md-4">
                     <div class="projects-item__top">
                         <img src="{{ url_for('static',filename='images/project-calculator.png') }}" alt="Зображення проеєкту" class="projects-item__image">
                     </div>
                     <div class="projects-item__bottom">
                         <h3 class="projects-item__title">Калькулятор з інтерфейсом на Qt</h3>
                     </div>
-                </li>
-            </ul>
-
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}
@@ -119,7 +118,7 @@
                         <img src="{{ url_for('static', filename='images/icon-youtube.svg') }}" alt="icon-youtube" class="network-icons__vector">
                     </div>
                 </a>
-                <a href="https://discord.gg/hknBTS92Rd" class="network-icons__link">
+                <a href="https://discord.gg/hknBS92Rd" class="network-icons__link">
                     <div class="network-icons__icon">
                         <img src="{{ url_for('static', filename='images/icon-discord.svg') }}" class="network-icons__vector">
                     </div>

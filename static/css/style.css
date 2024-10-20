@@ -22,6 +22,12 @@ body {
   font-weight: 400;
 }
 
+ul, ol, dl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 li {
   list-style: none;
 }
@@ -204,11 +210,11 @@ h3 {
   padding-bottom: 150px;
 }
 .projects-item {
-  background-color: #f5f4f6;
 }
 
 .projects-item__top {
   display: grid;
+  background-color: #f5f4f6;
 }
 
 .projects-item__image {
