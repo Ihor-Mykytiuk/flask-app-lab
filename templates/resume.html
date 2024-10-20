@@ -13,6 +13,9 @@
                 <h1 class="title__text">Про себе</h1>
                 <div class="title__underline"></div>
             </div>
+            <div class="about__text">
+                Мене звати Ігор, мені 20 років, я студент 3 курсу спеціальності "Інженерія програмного забезпечення" Прикарпатського національного університету. Маю досвід роботи з різними мовами програмування та технологіями. У майбутньому я мрію стати успішним розробником програмного забезпечення та зробити свій внесок у розвиток ІТ-індустрії. Я впевнений, що отримані знання та практичні навички допоможуть мені здійснити цю мрію
+            </div>
         </div>
     </section>
     <section class="education" id="education">
@@ -21,6 +24,14 @@
                 <h1 class="title__text">Освіта</h1>
                 <div class="title__underline"></div>
             </div>
+            <ul class="education__list">
+                <li class="education__list-item"><strong>Прикарпатський національний університет</strong> — Спеціальність: Інженерія програмного забезпечення (3 курс, бакалавр)</li>
+                <li class="education__list-item"><strong>Курс "Основи веб-розробки"</strong> — Онлайн-платформа: Coursera</li>
+                <li class="education__list-item"><strong>Курс "Web Developer Bootcamp with Flask and Python"</strong> — Онлайн-платформа: Udemy</li>
+                <li class="education__list-item"><strong>Курс "Introduction to MongoDB"</strong> — Онлайн-платформа: MongoDB University</li>
+                <li class="education__list-item"><strong>Курс "CLA - Programming Essentials in C"</strong> — Онлайн-платформа: Cisco Networking Academy</li>
+                <li class="education__list-item"><strong>Курс "PCAP: Programming Essentials in Python"</strong> — Онлайн-платформа: Cisco Networking Academy</li>
+            </ul>
         </div>
     </section>
     <section class="skills">
@@ -29,14 +40,71 @@
                 <h1 class="title__text">Навички</h1>
                 <div class="title__underline"></div>
             </div>
+            <ul class="skills__list">
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">HTML, CSS, JS</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">SQL, MongoDB</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">Python, C++, Java, PHP</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">Flask, Spring</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">Розуміння основних принципів роботи операційних систем та мереж</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">Навички роботи з системами контролю версій</span>
+                </li>
+                <li class="skills__list-item skills-item">
+                    <div class="skills-item__ellipse"></div>
+                    <span class="skills-item__text">Здатність аналізувати завдання та розробляти ефективні алгоритми для його вирішення.</span>
+                </li>
+            </ul>
         </div>
     </section>
     <section class="projects" id="projects">
         <div class="projects__container">
             <div class="projects__title title">
                 <h1 class="title__text">Проєкти</h1>
-                <div class="title__underline"></div>
+                <div class="title__underline--light"></div>
             </div>
+            <ul class="projects__list projects-list">
+                <li class="projects-list__item projects-item">
+                    <div class="projects-item__top">
+                        <img src="{{ url_for('static',filename='images/project-page.png') }}" alt="Зображення проеєкту" class="projects-item__image">
+                    </div>
+                    <div class="projects-item__bottom">
+                        <h3 class="projects-item__title">Адаптивна верстка сайту</h3>
+                    </div>
+                </li>
+                <li class="projects-list__item projects-item">
+                    <div class="projects-item__top">
+                        <img src="{{ url_for('static',filename='images/project-habits.png') }}" alt="Зображення проеєкту" class="projects-item__image">
+                    </div>
+                    <div class="projects-item__bottom">
+                        <h3 class="projects-item__title">Планувальник задач на Flask</h3>
+                    </div>
+                </li>
+                <li class="projects-list__item projects-item">
+                    <div class="projects-item__top">
+                        <img src="{{ url_for('static',filename='images/project-calculator.png') }}" alt="Зображення проеєкту" class="projects-item__image">
+                    </div>
+                    <div class="projects-item__bottom">
+                        <h3 class="projects-item__title">Калькулятор з інтерфейсом на Qt</h3>
+                    </div>
+                </li>
+            </ul>
+
         </div>
     </section>
 {% endblock %}
