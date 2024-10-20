@@ -108,3 +108,33 @@
         </div>
     </section>
 {% endblock %}
+{% block footer %}
+    <footer class="footer">
+        <div class="footer__container">
+            <img class="footer__logo" src="{{ url_for('static', filename='images/logo-right.svg') }}" alt="logo">
+            {% include 'navbar.html' %}
+            <div class="footer__network-icons network-icons">
+                <a href="https://www.youtube.com/@user-dm3sd2gz8b" class="network-icons__link">
+                    <div class="network-icons__icon">
+                        <img src="{{ url_for('static', filename='images/icon-youtube.svg') }}" alt="icon-youtube" class="network-icons__vector">
+                    </div>
+                </a>
+                <a href="https://discord.gg/hknBTS92Rd" class="network-icons__link">
+                    <div class="network-icons__icon">
+                        <img src="{{ url_for('static', filename='images/icon-discord.svg') }}" class="network-icons__vector">
+                    </div>
+                </a>
+                <a href="https://instagram.com/ihor_mykytiuck?igshid=ZGUzMzM3NWJiOQ==" class="network-icons__link">
+                    <div class="network-icons__icon">
+                        <img src="{{ url_for('static', filename='images/icon-instagram.svg') }}" class="network-icons__vector">
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100068980839238" class="network-icons__link">
+                    <div class="network-icons__icon">
+                        <img src="{{ url_for('static', filename='images/icon-facebook.svg') }}" alt="icon-facebook" class="network-icons__vector">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
