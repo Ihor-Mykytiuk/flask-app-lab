@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block header %}
+    <div class="header__container">
+        <h1 class="header__title"><a href="{{ url_for('main') }}" class="header__link">Flask Application</a></h1>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="greeting">
+        <div class="greeting__container">
+        <nav class="greeting-nav">
+            <ul class="greeting-nav__list">
+                <li class="greeting-nav__item">
+                    <a href="{{ url_for('users.greetings', name='John', age=45) }}" class="greeting-nav__link">Greet John</a>
+                </li>
+
+                <li class="greeting-nav__item">
+                    <a href="{{ url_for('users.admin') }}" class="greeting-nav__link">Admin</a>
+                </li>
+            </ul>
+        </nav>
+
+        <h1>Hello:) </h1>
+        <h3>User: {{ name | title }}</h3>
+        {% if age %}
+            <h3 style="color: green">Age: {{ age }}</h3>
+        {% else %}
+            <h3 style="color: red">Age: Not provided</h3>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

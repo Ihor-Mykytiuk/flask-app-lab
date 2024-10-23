@@ -269,3 +269,29 @@ h3 {
   background-color: #fff;
   transition: 0.3s;
 }
+
+/* -------------------------------------------------------------------------------------*/
+
+.header__title {
+  color: #f5f4f6;
+}
+
+.greeting-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 20px;
+  width: 50%;
+  height: 200px;
+  padding: 20px;
+  background-color: #4c4c4c;
+}
+
+.greeting-nav__link,
+.header__link {
+  color: #f5f4f6;
+}
+
+.greeting-nav__link:hover {
+  color: #817a68;
+}

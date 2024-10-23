@@ -12,17 +12,6 @@ def home():
     agent = request.user_agent
     return render_template('home.html', agent=agent)
 
-@app.route('/hi/<string:name>/')
-def greetings(name):
-    name = name.upper()
-    age = request.args.get('age', 0, type=int)
-    return render_template('hi.html', name=name, age=age)
-
-@app.route('/admin')
-def admin():
-    to_url = url_for("greetings", name="administrator", _external=True)
-    return redirect(to_url)
-
 @app.route('/resume')
 def resume():
     return render_template('resume.html', title='Резюме')
