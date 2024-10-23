@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Post № {{post["id"]}} - {{post["title"]}} </h1>
+
+    <p>{{ post.get('content') }}</p>
+
+    <a href="{{ url_for('post.get_posts') }}">Return posts</a>
+{% endblock %}

@@ -34,7 +34,6 @@ li {
 
 a {
   text-decoration: none;
-  color: #f5f4f6;
 }
 
 h1,
@@ -46,7 +45,6 @@ h3 {
 
 h1 {
   font-size: 36px;
-  text-align: center;
   line-height: 61px;
 }
 
@@ -128,6 +126,7 @@ h3 {
 
 .menu__link {
   transition: 0.3s;
+    color: #f5f4f6;
 }
 
 .menu__link:hover {
