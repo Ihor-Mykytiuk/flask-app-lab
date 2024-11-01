@@ -5,10 +5,11 @@ from . import users_bp
 
 @users_bp.route('/profile')
 def get_profile():
-    if "username" in session:
-        username_value = session["username"]
-        return render_template('profile.html', username=username_value)
-    return redirect(url_for("users.login"))
+    if 'username' not in session:
+        flash('Будь ласка, увійдіть, щоб переглянути профіль.', 'danger')
+        return redirect(url_for('users.login'))
+    username = session['username']
+    return render_template('profile.html', username=username)
 
 @users_bp.route('/login', methods=['GET', 'POST'])
 def login():
