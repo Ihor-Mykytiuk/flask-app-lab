@@ -4,6 +4,12 @@ from flask import render_template, request, redirect, url_for, make_response, se
 from . import users_bp
 
 
+@users_bp.route('/set_color_scheme/<string:scheme>')
+def set_color_scheme(scheme):
+    if scheme in ['light', 'dark']:
+        session['color_scheme'] = scheme
+    return redirect(url_for('users.get_profile'))
+
 @users_bp.route('/profile', methods=['GET', 'POST'])
 def get_profile():
     if 'username' not in session:
@@ -11,6 +17,7 @@ def get_profile():
         return redirect(url_for('users.login'))
     username = session['username']
     cookies = request.cookies
+    color_scheme = session.get('color_scheme', 'light')
     if request.method == 'POST':
         if 'add_cookie' in request.form:
             # Додати кукі
@@ -38,7 +45,7 @@ def get_profile():
                 resp.set_cookie(key, '', expires=0)
             flash('Всі кукі успішно видалено', 'success')
             return resp
-    return render_template('profile.html', username=username, cookies=cookies)
+    return render_template('profile.html', username=username, cookies=cookies, color_scheme=color_scheme)
 
 
 @users_bp.route('/login', methods=['GET', 'POST'])
