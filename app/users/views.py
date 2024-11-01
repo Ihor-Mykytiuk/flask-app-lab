@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from flask import render_template, request, redirect, url_for, make_response, session
+from flask import render_template, request, redirect, url_for, make_response, session, flash
 from . import users_bp
 
 @users_bp.route('/profile')
@@ -14,8 +14,13 @@ def get_profile():
 def login():
     if request.method == 'POST':
         username = request.form["username"]
-        session["username"] = username
-        return redirect(url_for("users.get_profile"))
+        password = request.form["password"]
+        if username == "Ihor" and password == "123":
+            flash("Вхід виконано успішно", "success")
+            session["username"] = username
+            return redirect(url_for("users.get_profile"))
+        else:
+            flash("Неправильний логін або пароль", "danger")
     return render_template('login.html')
 
 @users_bp.route('/logout')

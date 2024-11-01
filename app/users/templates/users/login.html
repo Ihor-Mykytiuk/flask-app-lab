@@ -1,8 +1,62 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4">
+              <!-- Flash messages section -->
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+              <div class="mt-4">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+              {% endif %} {% endwith %}
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">
+                Please enter your username and password!
+              </p>
 
-{% block content %}
-    <form action="" method="POST">
-        Ім'я користувача: <input type="text" name="username">
-        <input type="submit" value="Увійти">
-    </form>
+              <form method="post">
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="text"
+                    id="typeUsernameX"
+                    name="username"
+                    class="form-control form-control-lg"
+                    required
+                  />
+                  <label class="form-label" for="typeUsernameX">Username</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input
+                    type="password"
+                    id="typePasswordX"
+                    name="password"
+                    class="form-control form-control-lg"
+                    required
+                  />
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+
+                <button
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn btn-outline-light btn-lg px-5"
+                  type="submit"
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
