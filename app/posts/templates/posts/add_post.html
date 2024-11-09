@@ -6,6 +6,9 @@
             {{ form.hidden_tag() }}
             {{ render_field(form.title) }}
             {{ render_field(form.content) }}
+            {{ render_field(form.is_active) }}
+            {{ render_field(form.publish_date) }}
+            {{ render_field(form.category) }}
             {{ form.submit(class="btn btn-primary") }}
         </form>
         <br/>

@@ -1,12 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Articles</h1>
-    <ul>
-    {% for post in posts %}
-    	<li>
-            {{ post["id"] }}
-            <a href="{{ url_for('post.get_post', id=post['id'] ) }}">{{ post["title"] }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Articles</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="badge bg-info">{{ post.category }}</span>
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title>">{{ post.title }}</h5>
+
+                            <p class="card-text">{{ post.content }}</p>
+                            {% if post.is_active %}
+                            	<a href="{{ url_for('post.get_post', post_id=post.id) }}" class="btn btn-primary">Read more</a>
+                            {% else %}
+                                <a  class="btn btn-primary disabled">Post is archived</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">{{ post.published_date }} | Author: {{ post.author }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
