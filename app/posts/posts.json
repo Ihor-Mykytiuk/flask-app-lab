@@ -1,29 +1,38 @@
 [
-  {
-    "id": 1,
-    "title": "My First Post",
-    "content": "This is the content of my first post.",
-    "category": "Technology",
-    "is_active": true,
-    "published_date": "2020-01-01",
-    "author": "John Doe"
-  },
-  {
-    "id": 2,
-    "title": "Another Day",
-    "content": "Today I learned about Flask macros.",
-    "category": "Science",
-    "is_active": true,
-    "published_date": "2020-01-02",
-    "author": "Jane Smith"
-  },
-  {
-    "id": 3,
-    "title": "Flask and Jinja2",
-    "content": "Jinja2 is powerful for templating.",
-    "category": "Technology",
-    "is_active": false,
-    "published_date": "2020-01-03",
-    "author": "Mike Lee"
-  }
+    {
+        "id": 1,
+        "title": "My First Post",
+        "content": "This is the content of my first post.",
+        "category": "Technology",
+        "is_active": true,
+        "published_date": "2020-01-01",
+        "author": "John Doe"
+    },
+    {
+        "id": 2,
+        "title": "Another Day",
+        "content": "Today I learned about Flask macros.",
+        "category": "Science",
+        "is_active": true,
+        "published_date": "2020-01-02",
+        "author": "Jane Smith"
+    },
+    {
+        "id": 3,
+        "title": "Flask and Jinja2",
+        "content": "Jinja2 is powerful for templating.",
+        "category": "Technology",
+        "is_active": false,
+        "published_date": "2020-01-03",
+        "author": "Mike Lee"
+    },
+    {
+        "id": 4,
+        "title": "Test post",
+        "content": "Some content",
+        "is_active": true,
+        "published_date": "2024-11-12",
+        "category": "lifestyle",
+        "author": "Anonymous"
+    }
 ]

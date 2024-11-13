@@ -4,7 +4,7 @@
         {% if field.type == 'BooleanField' %}
             {{ field(class="form-check-input") }}
         {% else %}
-            {{ field(class="form-control") }}
+            {{ field(class="form-control", **kwargs) |safe }}
         {% endif %}
         {% if field.errors %}
             <div class="text-danger">

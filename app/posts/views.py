@@ -1,6 +1,6 @@
 import os, json
 from . import posts_bp
-from flask import render_template, abort, flash, redirect, url_for, session
+from flask import render_template, abort, flash, redirect, url_for, session, request
 from .forms import PostForm
 
 POST_FILE = 'app/posts/posts.json'
@@ -40,6 +40,9 @@ def add_post():
         save_json_data(POST_FILE, posts)
         flash(f"Post '{new_post['title']}' has been added.", 'success')
         return redirect(url_for('.get_posts'))
+    elif request.method == "POST":
+        flash(f"Enter the correct data in the form!", "danger")
+
     return render_template('add_post.html', form=form)
 
 @posts_bp.route('/<int:post_id>')

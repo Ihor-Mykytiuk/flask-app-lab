@@ -4,7 +4,7 @@
     <div class="container">
         <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
-            {{ render_field(form.title) }}
+            {{ render_field(form.title, placeholder="Enter title") }}
             {{ render_field(form.content) }}
             {{ render_field(form.is_active) }}
             {{ render_field(form.publish_date) }}
