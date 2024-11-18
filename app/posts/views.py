@@ -2,6 +2,7 @@ import os, json
 from . import posts_bp
 from flask import render_template, abort, flash, redirect, url_for, session, request
 from .forms import PostForm
+from .models import Post
 
 POST_FILE = 'app/posts/posts.json'
 
