@@ -25,6 +25,4 @@ def create_app(config_name='config'):
         app.register_blueprint(posts_bp)
         app.register_blueprint(users_bp)
 
-        db.create_all()
-
     return app
