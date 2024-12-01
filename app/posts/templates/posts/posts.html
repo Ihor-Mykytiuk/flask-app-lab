@@ -24,14 +24,15 @@
 
                             <p class="card-text">{{ post.content | truncate(23) }}</p>
                             {% if post.is_active %}
-                                <a href="{{ url_for('post.get_post', post_id=post.id) }}" class="btn btn-primary">Read
+                                <a href="{{ url_for('posts.get_post', post_id=post.id) }}" class="btn btn-primary">Read
                                     more</a>
                             {% else %}
                                 <a class="btn btn-primary disabled">Post is archived</a>
+                                <a class="btn btn-danger" href="{{ url_for('posts.remove_post', post_id=post.id) }}">Delete</a>
                             {% endif %}
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">{{ post.published_date }} | Author: {{ post.author }}</small>
+                            <small class="text-muted">{{ post.posted }} | Author: {{ post.author }}</small>
                         </div>
                     </div>
                 </div>

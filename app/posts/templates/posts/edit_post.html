@@ -1,0 +1,33 @@
+{% from 'form_macros.html' import render_field %}
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="mb-4 text-center">Edit Post</h1>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            <!-- Поле для заголовка -->
+            {{ render_field(form.title, placeholder="Edit title") }}
+
+            <!-- Поле для контенту -->
+            {{ render_field(form.content) }}
+
+            <!-- Поле для стану (активний чи ні) -->
+            {{ render_field(form.is_active) }}
+
+            <!-- Поле для дати публікації -->
+            {{ render_field(form.publish_date) }}
+
+            <!-- Поле для категорії -->
+            {{ render_field(form.category) }}
+
+            <!-- Кнопка оновлення -->
+            {{ form.submit(class="btn btn-success", value="Update Post") }}
+        </form>
+
+        <br/>
+        <a href="{{ url_for('posts.get_posts') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Return to Posts
+        </a>
+    </div>
+{% endblock %}
