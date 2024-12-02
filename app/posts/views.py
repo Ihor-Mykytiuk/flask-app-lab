@@ -2,7 +2,8 @@ import os, json
 from . import posts_bp
 from flask import render_template, abort, flash, redirect, url_for, session, request
 from .forms import PostForm
-from .models import Post
+from .models import Post, Tag
+from app.users.models import User
 from .. import db
 
 POST_FILE = 'app/posts/posts.json'
@@ -30,19 +31,30 @@ def get_posts():
 @posts_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
     form = PostForm()
+
+    authors = User.query.all()
+    form.author_id.choices = [(author.id, author.username) for author in authors]
+
+    tags = Tag.query.all()
+    form.tags.choices = [(tag.id, tag.name) for tag in tags]
+
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
         is_active = form.is_active.data
         published_date = form.publish_date.data
         category = form.category.data
-        author = session.get('username', None)
+        author_id = form.author_id.data
         new_post = Post(title=title,
                         content=content,
                         is_active=is_active,
                         posted=published_date,
                         category=category,
-                        author=author)
+                        user_id=author_id)
+
+        tags = Tag.query.filter(Tag.id.in_(form.tags.data)).all()
+        new_post.tags.extend(tags)
+
         db.session.add(new_post)
         db.session.commit()
         flash(f"Post '{title}' has been added.", 'success')

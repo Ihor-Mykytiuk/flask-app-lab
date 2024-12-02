@@ -15,6 +15,11 @@
                         <hr>
                         <p class="badge bg-info px-3 py-2">{{ post.category }}</p>
                         <p class="card-text fs-5">{{ post.content }}</p>
+                        <div class="mb-3">
+                            {% for tag in post.tags %}
+                                <span class="badge bg-secondary">{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
                         <div class="d-flex">
                             <a href="{{ url_for('posts.edit_post', post_id=post.id) }}" class="btn btn-warning me-2">
                                 Edit
