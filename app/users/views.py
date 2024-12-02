@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from flask import render_template, request, redirect, url_for, make_response, session, flash
 from . import users_bp
+from .models import User
 
 
 @users_bp.route('/set_color_scheme/<string:scheme>')
