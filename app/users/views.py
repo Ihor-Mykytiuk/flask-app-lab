@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from flask import render_template, request, redirect, url_for, make_response, session, flash
 from . import users_bp
 from .models import User
+from .forms import LoginForm, RegistrationForm
+from app import db
 
 
 @users_bp.route('/set_color_scheme/<string:scheme>')
@@ -51,17 +53,33 @@ def get_profile():
 
 @users_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form["username"]
-        password = request.form["password"]
-        if username == "Ihor" and password == "123":
-            flash("Вхід виконано успішно", "success")
-            session["username"] = username
-            return redirect(url_for("users.get_profile"))
+    form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            session['username'] = user.username
+            flash(f'Ви увійшли як {user.username}', 'success')
+            return redirect(url_for('users.get_profile'))
         else:
-            flash("Неправильний логін або пароль", "danger")
-    return render_template('login.html')
+            flash('Неправильний email або пароль', 'danger')
+    return render_template('login.html', form=form)
 
+@users_bp.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        new_user = User(username=username, email=email)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Ви успішно зареєструвалися', 'success')
+        return redirect(url_for('users.login'))
+    return render_template('register.html', form=form)
 
 @users_bp.route('/logout')
 def logout():

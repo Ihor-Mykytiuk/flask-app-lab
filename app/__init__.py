@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy.orm import DeclarativeBase
@@ -8,7 +9,7 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
-
+bcrypt = Bcrypt()
 
 def create_app(config_name='config'):
     app = Flask(__name__)
@@ -16,6 +17,7 @@ def create_app(config_name='config'):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    bcrypt.init_app(app)
 
     with app.app_context():
         from . import views
