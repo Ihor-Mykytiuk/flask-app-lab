@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container p-4 bg-light shadow rounded mt-5  ">
+        <h1 class="fs-4 fw-bold border-bottom pb-2">Дані Користувача</h1>
+        <div class="mt-4">
+            <div class="d-flex align-items-center mb-3">
+                <strong class="me-3 w-25">ID:</strong>
+                <span>{{ session.user_id['id'] }}</span>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <strong class="me-3 w-25">Username:</strong>
+                <span>{{ session.user_id['username'] }}</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <strong class="me-3 w-25">Email:</strong>
+                <span>{{ session.user_id['email'] }}</span>
+            </div>
+        </div>
+        <a href="{{ url_for('users.registered_users') }}" class="btn btn-primary mt-3 me-2">Усі користувачі</a>
+
+    </div>
+{% endblock %}

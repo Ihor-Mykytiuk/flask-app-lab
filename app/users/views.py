@@ -59,9 +59,9 @@ def login():
         password = form.password.data
         user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
-            session['username'] = user.username
+            session['user_id'] = {'id': user.id, 'username': user.username, 'email': user.email}
             flash(f'Ви увійшли як {user.username}', 'success')
-            return redirect(url_for('users.get_profile'))
+            return redirect(url_for('users.account'))
         else:
             flash('Неправильний email або пароль', 'danger')
     return render_template('login.html', form=form)
@@ -86,6 +86,17 @@ def logout():
     session.pop("username", None)
     return redirect(url_for("users.get_profile"))
 
+@users_bp.route('/account')
+def account():
+    if 'user_id' not in session:
+        flash('Будь ласка, увійдіть, щоб переглянути аккаунт.', 'danger')
+        return redirect(url_for('users.login'))
+    return render_template('account.html')
+
+@users_bp.route('/registered_users')
+def registered_users():
+    users = User.query.all()
+    return render_template('registered_users.html', users=users)
 
 @users_bp.route('/hi/<string:name>/')
 def greetings(name):
