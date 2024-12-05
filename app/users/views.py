@@ -1,6 +1,9 @@
+import os
 from datetime import datetime, timedelta
 
 from flask import render_template, request, redirect, url_for, make_response, session, flash
+from werkzeug.utils import secure_filename
+
 from . import users_bp
 from .models import User
 from .forms import LoginForm, RegistrationForm, UpdateAccountForm
@@ -103,9 +106,19 @@ def update_account():
     if form.validate_on_submit():
         account.username = form.username.data
         account.email = form.email.data
+        account.about_me = form.about_me.data
+
+        file = form.image_file.data
+        if file:
+            filename = secure_filename(file.filename)
+            image_path = os.path.join(users_bp.root_path, 'static/img', filename)
+            file.save(image_path)
+            account.image_file = filename
+
         db.session.commit()
         flash('Account updated successfully', 'success')
         return redirect(url_for('users.account'))
+
     return render_template('update_account.html', form=form)
 
 

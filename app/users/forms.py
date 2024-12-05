@@ -1,6 +1,8 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from flask_wtf.file import FileAllowed
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, FileField
+from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, Regexp, ValidationError
 
 from app.users.models import User
@@ -40,6 +42,8 @@ class UpdateAccountForm(FlaskForm):
                                       )
                            ])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    image_file = FileField('Update Profile Image', validators=[FileAllowed(['jpg', 'png'])])
+    about_me = TextAreaField('About Me', render_kw={"rows": 5, "cols": 40})
 
     submit = SubmitField('Update')
 

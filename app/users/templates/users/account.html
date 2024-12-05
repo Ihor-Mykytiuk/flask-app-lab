@@ -1,31 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container p-4 bg-light shadow rounded mt-5">
-        <h1 class="fs-4 fw-bold border-bottom pb-2">Дані Користувача</h1>
-        <div class="d-flex align-items-start">
-            <div class="me-4">
-                <img src="{{ url_for('.static', filename='img/default.png') }}" alt="Profile Image"
-                     class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
-            </div>
-            <div>
-                <div class="mb-3">
-                    <strong class="d-block">ID:</strong>
-                    <span>{{ user.id }}</span>
+    <div class="container py-5">
+        <div class="card shadow-lg border-0 rounded">
+            <div class="row g-0">
+                <div class="col-md-4 text-center bg-light p-4">
+                    <img
+                            src="{{ url_for('.static', filename='img/' + (user.image_file or 'default.png')) }}"
+                            alt="Profile Image"
+                            class="rounded-circle img-fluid mb-3 shadow"
+                            style="max-width: 200px; max-height: 200px;"
+                    >
+                    <h2 class="fs-5 fw-bold text-primary">{{ user.username }}</h2>
+                    <p class="text-muted">{{ user.email }}</p>
+                    <a href="{{ url_for('users.update_account') }}" class="btn btn-warning w-75 my-2">Редагувати
+                        профіль</a>
                 </div>
-                <div class="mb-3">
-                    <strong class="d-block">Username:</strong>
-                    <span>{{ user.username }}</span>
-                </div>
-                <div class="mb-3">
-                    <strong class="d-block">Email:</strong>
-                    <span>{{ user.email }}</span>
+                <div class="col-md-8">
+                    <div class="card-body p-4">
+                        <h3 class="card-title text-secondary border-bottom pb-2 mb-4">Інформація про користувача</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <strong>ID:</strong> <span class="text-muted">{{ user.id }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Останній візит:</strong> <span
+                                    class="text-muted">{{ user.last_seen.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Про мене:</strong>
+                                <p class="text-muted mb-0">{{ user.about_me }}</p>
+                            </li>
+                        </ul>
+                        <a href="{{ url_for('users.registered_users') }}" class="btn btn-primary mt-3">Переглянути усіх
+                            користувачів</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="text-end mt-3">
-            <a href="{{ url_for('users.update_account') }}" class="btn btn-warning">Редагувати профіль</a>
-        </div>
-        <a href="{{ url_for('users.registered_users') }}" class="btn btn-primary mt-3 me-2">Усі користувачі</a>
     </div>
 {% endblock %}

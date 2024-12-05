@@ -3,10 +3,12 @@
 {% block content %}
     <div class="container p-4 bg-light shadow rounded mt-5">
         <h1 class="fs-4 fw-bold border-bottom pb-2">Оновити Дані Акаунту</h1>
-        <form method="post" action="{{ url_for('users.update_account') }}" novalidate>
+        <form method="post" action="{{ url_for('users.update_account') }}" enctype="multipart/form-data" novalidate>
             {{ form.hidden_tag() }}
             {{ render_field(form.username) }}
             {{ render_field(form.email) }}
+            {{ render_field(form.image_file) }}
+            {{ render_field(form.about_me) }}
             {{ form.submit(class="btn btn-primary mt-3") }}
         </form>
     </div>

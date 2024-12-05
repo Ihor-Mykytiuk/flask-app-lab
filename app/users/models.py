@@ -1,5 +1,6 @@
 from app import db, bcrypt, login_manager
 from flask_login import UserMixin
+from datetime import datetime as dt
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -13,6 +14,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     image_file = db.Column(db.String(20), nullable=True, default='default.png')
+    about_me = db.Column(db.Text, nullable=True)
+    last_seen = db.Column(db.DateTime, nullable=True, default=dt.now)
 
     def set_password(self, password):
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')

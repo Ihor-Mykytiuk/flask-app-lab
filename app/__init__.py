@@ -3,7 +3,8 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy.orm import DeclarativeBase
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
+from datetime import datetime as dt
 
 class Base(DeclarativeBase):
     pass
@@ -38,5 +39,11 @@ def create_app(config_name='config.DevelopmentConfig'):
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template('404.html'), 404
+
+    @app.before_request
+    def update_last_seen():
+        if current_user.is_authenticated:
+            current_user.last_seen = dt.now()
+            db.session.commit()
 
     return app
