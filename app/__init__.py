@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -27,11 +27,16 @@ def create_app(config_name='config'):
     login_manager.login_message_category = 'warning'
 
     with app.app_context():
-        from . import views
+        from app.main import main_bp
         from app.users import users_bp
         from app.posts import posts_bp
 
+        app.register_blueprint(main_bp)
         app.register_blueprint(posts_bp)
         app.register_blueprint(users_bp)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
 
     return app
