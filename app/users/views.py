@@ -4,7 +4,8 @@ from flask import render_template, request, redirect, url_for, make_response, se
 from . import users_bp
 from .models import User
 from .forms import LoginForm, RegistrationForm
-from app import db
+from app import db, login_manager
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @users_bp.route('/set_color_scheme/<string:scheme>')
@@ -14,10 +15,8 @@ def set_color_scheme(scheme):
     return redirect(url_for('users.get_profile'))
 
 @users_bp.route('/profile', methods=['GET', 'POST'])
+@login_required
 def get_profile():
-    if 'username' not in session:
-        flash('Будь ласка, увійдіть, щоб переглянути профіль.', 'danger')
-        return redirect(url_for('users.login'))
     username = session['username']
     cookies = request.cookies
     color_scheme = session.get('color_scheme', 'light')
@@ -59,7 +58,7 @@ def login():
         password = form.password.data
         user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
-            session['user_id'] = {'id': user.id, 'username': user.username, 'email': user.email}
+            login_user(user, remember=form.remember.data)
             flash(f'Ви увійшли як {user.username}', 'success')
             return redirect(url_for('users.account'))
         else:
@@ -70,6 +69,9 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        if User.query.filter_by(email=form.email.data).first():
+            flash('Користувач з таким email вже існує', 'danger')
+            return redirect(url_for('users.register'))
         username = form.username.data
         email = form.email.data
         password = form.password.data
@@ -82,18 +84,19 @@ def register():
     return render_template('register.html', form=form)
 
 @users_bp.route('/logout')
+@login_required
 def logout():
-    session.pop("username", None)
-    return redirect(url_for("users.get_profile"))
+    logout_user()
+    flash('Ви успішно вийшли з системи', 'success')
+    return redirect(url_for('users.login'))
 
 @users_bp.route('/account')
+@login_required
 def account():
-    if 'user_id' not in session:
-        flash('Будь ласка, увійдіть, щоб переглянути аккаунт.', 'danger')
-        return redirect(url_for('users.login'))
-    return render_template('account.html')
+    return render_template('account.html', user=current_user)
 
 @users_bp.route('/registered_users')
+@login_required
 def registered_users():
     users = User.query.all()
     return render_template('registered_users.html', users=users)

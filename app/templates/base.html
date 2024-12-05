@@ -32,28 +32,26 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('users.register') }}"
-                                >Реєстрація</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('users.login') }}"
-                                >Логін</a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('users.get_profile') }}"
-                                >Профіль</a
-                                >
-                            </li>
+                            {% if current_user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('users.account') }}">Мій профіль</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('users.logout') }}">Вихід</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('users.register') }}">Реєстрація</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('users.login') }}">Логін</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('resume') }}">Резюме</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('posts.add_post') }}"
-                                >Додати пост</a
-                                >
+                                <a class="nav-link" href="{{ url_for('posts.add_post') }}">Додати пост</a>
                             </li>
                         </ul>
                     </div>
