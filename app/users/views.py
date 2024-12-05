@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 from . import users_bp
 from .models import User
-from .forms import LoginForm, RegistrationForm, UpdateAccountForm
+from .forms import LoginForm, RegistrationForm, UpdateAccountForm, ChangePasswordForm
 from app import db, login_manager
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -121,6 +121,21 @@ def update_account():
 
     return render_template('update_account.html', form=form)
 
+@users_bp.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        old_password = form.old_password.data
+        new_password = form.new_password.data
+        if current_user.check_password(old_password):
+            current_user.set_password(new_password)
+            db.session.commit()
+            flash('Password updated successfully', 'success')
+            return redirect(url_for('users.account'))
+        else:
+            flash('Invalid password', 'danger')
+    return render_template('change_password.html', form=form)
 
 @users_bp.route('/registered_users')
 @login_required
