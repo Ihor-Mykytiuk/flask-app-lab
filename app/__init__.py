@@ -13,7 +13,7 @@ migrate = Migrate()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 
-def create_app(config_name='config'):
+def create_app(config_name='config.DevelopmentConfig'):
     app = Flask(__name__)
     app.config.from_object(config_name)
 

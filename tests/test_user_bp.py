@@ -4,8 +4,7 @@ from app import create_app
 class FlaskAppTestCase(unittest.TestCase):
     def setUp(self):
         """Налаштування клієнта тестування перед кожним тестом."""
-        self.app = create_app()
-        self.app.config["TESTING"] = True
+        self.app = create_app(config_name="config.TestingConfig")
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()

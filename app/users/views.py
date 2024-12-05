@@ -62,7 +62,7 @@ def login():
             flash(f'Ви увійшли як {user.username}', 'success')
             return redirect(url_for('users.account'))
         else:
-            flash('Неправильний email або пароль', 'danger')
+            flash('Invalid email or password', 'danger')
     return render_template('login.html', form=form)
 
 @users_bp.route('/register', methods=['GET', 'POST'])
@@ -87,7 +87,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('Ви успішно вийшли з системи', 'success')
+    flash('Logged out', 'success')
     return redirect(url_for('users.login'))
 
 @users_bp.route('/account')

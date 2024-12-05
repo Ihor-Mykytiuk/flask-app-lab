@@ -1,9 +1,12 @@
-SECRET_KEY = 'secret'
-FLASK_DEBUG = 1
+class Config:
+    SECRET_KEY = 'secret'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
-SQLALCHEMY_TRACK_MODIFICATIONS = False
+class DevelopmentConfig(Config):
+    FLASK_DEBUG = 1
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
 
-#import os
-#basedir = os.path.abspath(os.path.dirname(__file__))
-#SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+class TestingConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    WTF_CSRF_ENABLED = False
