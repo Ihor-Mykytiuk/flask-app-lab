@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from flask import render_template, request, redirect, url_for, make_response, session, flash
 from . import users_bp
 from .models import User
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, UpdateAccountForm
 from app import db, login_manager
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -94,6 +94,20 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', user=current_user)
+
+@users_bp.route('/update_account', methods=['GET', 'POST'])
+@login_required
+def update_account():
+    account = current_user
+    form = UpdateAccountForm(obj=account)
+    if form.validate_on_submit():
+        account.username = form.username.data
+        account.email = form.email.data
+        db.session.commit()
+        flash('Account updated successfully', 'success')
+        return redirect(url_for('users.account'))
+    return render_template('update_account.html', form=form)
+
 
 @users_bp.route('/registered_users')
 @login_required
