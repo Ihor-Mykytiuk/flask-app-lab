@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Housing Details{% endblock %}
+{% block css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div id="housingCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner rounded-3 overflow-hidden shadow-sm">
+                                {% for image in housing.images %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                        <img src="{{ url_for('.static', filename='img/' + image.filename) }}"
+                                             class="d-block w-100"
+                                             style="max-height: 500px; object-fit: cover;"
+                                             alt="{{ housing.title }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#housingCarousel"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#housingCarousel"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="bg-light p-4 rounded-3 h-100 shadow-sm">
+                            <div class="row g-3">
+                                <div class="col-12 text-muted">
+                                    {{ housing.created.strftime('%b %d, %Y') }}
+                                </div>
+                                <div class="col-12">
+                                    <h3 class="mb-2 text-dark fw-bold">{{ housing.title }}</h3>
+                                </div>
+
+
+                                <div class="col-12">
+
+                                    <h2 class="fw-bold">{{ housing.price }} $</h2>
+                                </div>
+                                <div class="col-12">
+                                    <p class="text-muted">{{ housing.address }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Area:</span>
+                                    </div>
+                                    <p class="text-muted">{{ housing.area }} m²</p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Rooms:</span>
+                                    </div>
+                                    <p class="text-muted">{{ housing.rooms }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Type:</span>
+                                    </div>
+                                    <div class="text-muted">{{ housing.housing_type.name }}</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Repair:</span>
+                                    </div>
+                                    <div class="text-muted">{{ housing.repair_type.name }}</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Communications:</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap">
+                                        {% for communication in housing.communications %}
+                                            <span class="badge bg-secondary me-2 mb-2">{{ communication.name }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <span class="fw-bold me-2">Comforts:</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap">
+                                        {% for comfort in housing.comforts %}
+                                            <span class="badge bg-secondary me-2 mb-2">{{ comfort.name }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="bg-light p-4 rounded-3 shadow-sm">
+                    <h3 class="mb-3 text-dark">Description</h3>
+                    <p class="text-muted">{{ housing.description }}</p>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center mt-3 gap-2">
+                {% if current_user.is_authenticated and housing.user_id == current_user.id %}
+                    <a href="{{ url_for('real_estate.edit_housing', housing_id=housing.id) }}" class="btn btn-outline-warning">Edit</a>
+                    <form action="{{ url_for('real_estate.delete_housing', housing_id=housing.id) }}" method="post">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

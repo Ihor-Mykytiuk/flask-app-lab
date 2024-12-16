@@ -31,10 +31,12 @@ def create_app(config_name='config.DevelopmentConfig'):
         from app.main import main_bp
         from app.users import users_bp
         from app.posts import posts_bp
+        from app.real_estate import real_estate_bp
 
         app.register_blueprint(main_bp)
         app.register_blueprint(posts_bp)
         app.register_blueprint(users_bp)
+        app.register_blueprint(real_estate_bp)
 
     @app.errorhandler(404)
     def page_not_found(e):

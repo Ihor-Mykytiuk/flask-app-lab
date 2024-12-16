@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Housings</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form.sort_by.label }}
+                            {{ form.sort_by(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form.type.label }}
+                            {{ form.type(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form.repair.label }}
+                            {{ form.repair(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <h5>Price Filter</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.min_price.label }}
+                            {{ form.min_price(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.max_price.label }}
+                            {{ form.max_price(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <h5>Area Filter</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.min_area.label }}
+                            {{ form.min_area(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.max_area.label }}
+                            {{ form.max_area(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {{ form.rooms.label }}
+                            {{ form.rooms(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <h5>Additional Options</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.communications.label }}
+                            {{ form.communications(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.comforts.label }}
+                            {{ form.comforts(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.submit(class="btn btn-primary mt-3") }}
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row mt-4">
+            {% if housings %}
+                {% for housing in housings %}
+                    <div class="col-12">
+                        <div class="card shadow-sm border-0 mb-3">
+                            <a href="{{ url_for('real_estate.get_housing', housing_id=housing.id) }}"
+                               class="text-dark">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <img src="{{ url_for('.static', filename='img/' + housing.images[0].filename) }}"
+                                             class="img-fluid rounded mb-2" alt="{{ housing.title }}"
+                                             style="object-fit: cover;">
+                                    </div>
+                                    <div class="col-md-8 d-flex justify-content-between">
+                                        <div class="d-flex flex-column justify-content-between">
+                                            <h5 class="card-title mb-2">{{ housing.title }}</h5>
+                                            <div>
+                                                <p class="text-muted mb-2">{{ housing.address }} {{ housing.created.strftime('%b %d, %Y') }}</p>
+                                                <p class="mb-2"> {{ housing.area }} m² | {{ housing.rooms }} rooms</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            <p class="mb-0"><strong>{{ housing.price }} $</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning text-center mt-4" role="alert">
+                    No housings found.
+                </div>
+            {% endif %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{{ url_for('real_estate.add_housing') }}" class="btn btn-lg btn-primary">Add Housing</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/real_estate.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{% endblock %}
+{% block title %}Edit Housing{% endblock %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="card w-100" style="max-width: 700px;">
+            <div class="card-body p-5">
+                <h2 class="text-center mb-4">Edit Housing</h2>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-floating mb-3">
+                        {{ form.title(class="form-control", placeholder="Title") }}
+                        <label>{{ form.title.label.text }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ form.description(class="form-control", placeholder="Description", style="height: 100px;") }}
+                        <label>{{ form.description.label.text }}</label>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Photos</label>
+                        <div class="row">
+                            {% for image in housing.images %}
+                                <div class="col-4 mb-3">
+                                    <div class="position-relative">
+                                        <img src="{{ url_for('.static', filename='img/' + image.filename) }}"
+                                             class="img-fluid rounded">
+                                        <form method="POST"
+                                              action="{{ url_for('real_estate.delete_photo', photo_id=image.id) }}">
+                                            {{ form.hidden_tag() }}
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm position-absolute top-0 end-0">X
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.price(class="form-control", placeholder="Price") }}
+                        <label>{{ form.price.label.text }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ form.address(class="form-control", placeholder="Address") }}
+                        <label>{{ form.address.label.text }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ form.area(class="form-control", placeholder="Area") }}
+                        <label>{{ form.area.label.text }}</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{ form.rooms(class="form-control", placeholder="Rooms") }}
+                        <label>{{ form.rooms.label.text }}</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.type.label.text }}</label>
+                        {{ form.type(class="form-select") }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.repair.label.text }}</label>
+                        {{ form.repair(class="form-select") }}
+                    </div>
+
+                    <fieldset class="mb-4">
+                        <legend><i class="fa-solid fa-wifi me-2"></i>{{ form.communications.label.text }}</legend>
+                        <div class="row">
+                            {% for subfield in form.communications %}
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        {{ subfield(class="form-check-input") }}
+                                        {{ subfield.label(class="form-check-label") }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mb-4">
+                        <legend><i class="fa-solid fa-couch me-2"></i>{{ form.comforts.label.text }}</legend>
+                        <div class="row">
+                            {% for subfield in form.comforts %}
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        {{ subfield(class="form-check-input") }}
+                                        {{ subfield.label(class="form-check-label") }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+                    <div class="text-center mt-4">
+                        {{ form.submit(class="btn btn-primary btn-lg w-100") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
